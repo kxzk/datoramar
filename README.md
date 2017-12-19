@@ -14,10 +14,6 @@ Datorama has a Query API constructor under the Analyze tab, but it's tedious. It
 ## Installation
 
 ```r
-install.packages('datoramar')
-```
-
-```r
 devtools::install_github('beigebrucewayne/datoramar')
 ```
 

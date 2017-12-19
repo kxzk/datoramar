@@ -1,6 +1,6 @@
 Package: datoramar
 Type: Package
-Title: An R Interface to the Datorama API
+Title: Interface to the Datorama API
 Version: 0.1.0
 Authors@R: person("Kade", "Killary", email = "kadekillary@protonmail.com",
     role = c("aut", "cre"))
