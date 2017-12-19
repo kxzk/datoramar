@@ -1,6 +1,6 @@
 # DatoramaR
 
-A thin wrapper around the [Datorama](https://datorama.com) API.
+A thin wrapper around the [Datorama](https://datorama.com) API.  
 [![Build Status](https://travis-ci.org/beigebrucewayne/datoramar.svg?branch=master)](https://travis-ci.org/beigebrucewayne/datoramar)
 
 ![logo](https://i.imgur.com/6c5kH7S.png)
