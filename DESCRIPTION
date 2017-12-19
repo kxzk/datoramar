@@ -1,12 +1,12 @@
 Package: datoramar
 Type: Package
-Title: An API Wrapper for Datorama
+Title: An R Interface to the Datorama API
 Version: 0.1.0
 Authors@R: person("Kade", "Killary", email = "kadekillary@protonmail.com",
     role = c("aut", "cre"))
 URL: https://github.com/beigebrucewayne/datoramar
 BugReports: https://github.com/beigebrucewayne/datoramar/issues
-Description: A thin wrapper around the Datorama API. 
+Description: A thin wrapper around the Datorama API.
     Ideal for analyzing marketing data from <https://datorama.com>.
 License: MIT + file LICENSE
 Encoding: UTF-8
