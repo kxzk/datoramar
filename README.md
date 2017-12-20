@@ -21,8 +21,8 @@ devtools::install_github('beigebrucewayne/datoramar')
 &nbsp;
 ## Authenticate
 
-1. You're going to need a paying Datorama account.
-2. You'll also need an account with permission to access the API.
+1. You're going to need a paying Datorama account
+2. You'll also need an account with permission to access the API
 3. Run `datorama_token()` with your email and password
 
 &nbsp;
