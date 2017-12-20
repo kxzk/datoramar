@@ -13,6 +13,7 @@ Datorama has a Query API constructor under the Analyze tab, but it's tedious. It
 &nbsp;
 ## Installation
 
+Install from Github
 ```r
 devtools::install_github('beigebrucewayne/datoramar')
 ```
@@ -29,9 +30,13 @@ devtools::install_github('beigebrucewayne/datoramar')
 
 Once you have your token, you can run a query using `datorama_query()`. This function will return the API's response as a tibble. Another example, using curl and JSON, can be seen [here](https://github.com/beigebrucewayne/datoramar/blob/master/curl-example.md).
 
+`datorama_token()` :: authentication
 ```r
-myToken <- datorama_token("email@gmail.com", "password1234")
+myToken <- datorama_token("analytics@data.com", "password1234")
+```
 
+`datorama_query()` :: run your query
+```r
 datorama_query(token = myToken,
                brandId = "271",
                dateRange = "CUSTOM",
