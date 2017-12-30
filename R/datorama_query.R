@@ -111,7 +111,9 @@ datorama_query <- function(token = NULL,
   )
 
   response_to_text <- jsonlite::fromJSON(httr::content(response, "text"))
+  tibble_headers <- response_to_text$queryResponseData$headers
   text_to_tibble <- tibble::as_tibble(response_to_text$queryResponseData$rows)
+  names(text_to_tibble) <- tibble_headers
 
   if (nrow(text_to_tibble) == 0) {
     warning("Hmmm...no rows returned. There might be a problem.")
