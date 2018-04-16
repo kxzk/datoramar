@@ -20,7 +20,7 @@ install.packages('datoramar')
 
 Install from Github
 ```r
-devtools::install_github('beigebrucewayne/datoramar')
+devtools::install_github('kadekillary/datoramar')
 ```
 
 &nbsp;
