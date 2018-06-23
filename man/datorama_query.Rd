@@ -2,28 +2,19 @@
 % Please edit documentation in R/datorama_query.R
 \name{datorama_query}
 \alias{datorama_query}
-\title{A query constructor for the Datorama API}
+\title{A query constructor for the Datorama Query API}
 \usage{
-datorama_query(token = NULL, brandId = NULL, dateRange = c("CUSTOM",
-  "CUSTOM_ON_GOING", "YESTERDAY", "WEEK_TO_DATE", "BI_WEEK_TO_DATE",
-  "MONTH_TO_DATE", "QUARTER_TO_DATE", "YEAR_TO_DATE", "WEEK_TO_DATE_CUSTOM",
-  "BI_WEEK_TO_DATE_CUSTOM", "MONTH_TO_DATE_CUSTOM", "QUARTER_TO_DATE_CUSTOM",
-  "YEAR_TO_DATE_CUSTOM", "PREV_WEEK", "PREV_BI_WEEK", "PREV_MONTH",
-  "PREV_QUARTER", "PREV_YEAR", "PREV_WEEK_CUSTOM", "PREV_BI_WEEK_CUSTOM",
-  "PREV_MONTH_CUSTOM", "PREV_QUARTER_CUSTOM", "PREV_YEAR_CUSTOM", "LAST_WEEK",
-  "LAST_BI_WEEK", "LAST_MONTH", "LAST_3_MONTHS", "THIS_WEEK",     
-  "THIS_BI_WEEK", "THIS_MONTH", "THIS_QUARTER", "THIS_YEAR", "THIS_WEEK_CUSTOM",
-  "THIS_BI_WEEK_CUSTOM", "THIS_MONTH_CUSTOM", "THIS_QUARTER_CUSTOM",
-  "THIS_YEAR_CUSTOM"), startDate = NULL, endDate = NULL,
-  measurements = NULL, dimensions = NULL, groupDimensionFilters = NULL,
+datorama_query(access_token = NULL, workspaceId = NULL, dateRange = NULL,
+  startDate = NULL, endDate = NULL, measurements = NULL,
+  dimensions = NULL, groupDimensionFilters = NULL,
   stringDimensionFilters = NULL, stringDimensionFiltersOperator = NULL,
   numberMeasurementFilter = NULL, sortBy = NULL, sortOrder = NULL,
   topResults = NULL, groupOthers = NULL, topPerDimension = NULL)
 }
 \arguments{
-\item{token}{A string containing your token for authentication. Get in \code{datorama_auth}}
+\item{access_token}{Authorization string that is found within the Datorama platform}
 
-\item{brandId}{A string containing the Brand ID}
+\item{workspaceId}{A string containing the workspaceId}
 
 \item{dateRange}{A string containing date range for query}
 
@@ -57,12 +48,14 @@ datorama_query(token = NULL, brandId = NULL, dateRange = c("CUSTOM",
 A tibble with the query's response
 }
 \description{
-A query constructor for the Datorama API
+Refer to Datorama's Developer portal for futher information. In
+order to use this package your account will have to have access
+to the Datorama Query API, which is a paid feature.
 }
 \examples{
 \dontrun{
-datorama_query(token = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-               brandId = "271",
+datorama_query(acces_token = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+               workspaceId = "271",
                dateRange = "CUSTOM",
                startDate = "2017-11-01",
                endDate = "2017-11-20",

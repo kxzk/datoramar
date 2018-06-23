@@ -1,22 +1,19 @@
 # DatoramaR
 
-An interface to the [Datorama](https://datorama.com) API.  
+An interface to the [Datorama](https://datorama.com) Query & Platform API.  
 
 [![Build Status](https://travis-ci.org/beigebrucewayne/datoramar.svg?branch=master)](https://travis-ci.org/beigebrucewayne/datoramar) [![CRAN status](http://www.r-pkg.org/badges/version/datoramar)](http://www.r-pkg.org/badges/version/datoramar)
 
 ![logo](https://i.imgur.com/6c5kH7S.png)
 
 &nbsp;
-## Why?
-Datorama has a Query API constructor under the Analyze tab, but it's tedious. It's a nice tool to graphically build your JSON request and see the results. However, this package allows for a cleaner interface. This package has two functions: `datorama_token()` and `datorama_query()`. You'll need an account with Datorama in order to authenticate yourself. After that, you are good to go. This can be a great tool to take your company's marketing data and turn it into an automated email report or Shiny dashboard.
+## Overview
+Datorama has two APIs: the Query API and the Platform API. This package interfaces with both. The Query API is for retrieving data out of Datorama. The Platform API is for interacting with the platform directly.
+
+As of right now, only the Query API and Data Stream Processing endpoints are supported.
 
 &nbsp;
 ## Installation
-
-Install from CRAN
-```r
-install.packages('datoramar')
-```
 
 Install from Github
 ```r
@@ -24,31 +21,37 @@ devtools::install_github('kadekillary/datoramar')
 ```
 
 &nbsp;
-## Authenticate
+## Authentication
 
-1. You're going to need a paying Datorama account
-2. You'll also need an account with permission to access the API
-3. Run `datorama_token()` with your email and password
+All API requests must authenticate using your personal API access token. The token can be found inside the Datorama platform under "My Profile" below your email address.
+
+Conversely, create an `.Renviron` file and specify your `ACCESS_TOKEN` in there. Now you can call it via R using `Sys.getenv("ACCESS_TOKEN")`.
 
 &nbsp;
 ## Usage
 
-Once you have your token, you can run a query using `datorama_query()`. This function will return the API's response as a tibble. Another example, using curl and JSON, can be seen [here](https://github.com/beigebrucewayne/datoramar/blob/master/curl-example.md).
+Once you have your token, you can run a query using `datorama_query()`. This function will return the Query API's response as a tibble.
 
-`datorama_token()` :: authentication
+`datorama_query()`
 ```r
-myToken <- datorama_token("analytics@data.com", "password1234")
-```
-
-`datorama_query()` :: run your query
-```r
-datorama_query(token = myToken,
-               brandId = "271",
+datorama_query(access_token = "dato-api-31i9a14b-b41d-323h-2f79-379nxhfdf8123",
+               workspaceId = "999999",
                dateRange = "CUSTOM",
                startDate = "2017-11-01",
                endDate = "2017-11-22",
                measurements = list(list(name = "Clicks"),
                                    list(name = "Impressions")),
                dimensions = list("Date", "Site Name")
+)
+```
+
+You can also use this API wrapper to automate the processing of particular Data Streams. You will need to specify the Data Stream by it's ID and specify a time window.
+
+`datorama_process()`
+```r
+datorama_process(acces_token = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                 dataStreamIds = list(348937, 34289),
+                 startDate = "2018-01-01",
+                 endDate = "2018-01-20"
 )
 ```

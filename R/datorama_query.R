@@ -1,7 +1,11 @@
-#' A query constructor for the Datorama API
+#' A query constructor for the Datorama Query API
 #'
-#' @param token A string containing your token for authentication. Get in \code{datorama_auth}
-#' @param brandId A string containing the Brand ID
+#' Refer to Datorama's Developer portal for futher information. In
+#' order to use this package your account will have to have access
+#' to the Datorama Query API, which is a paid feature.
+#'
+#' @param access_token Authorization string that is found within the Datorama platform
+#' @param workspaceId A string containing the workspaceId
 #' @param dateRange A string containing date range for query
 #' @param startDate A string -> format YYYY-MM-DD
 #' @param endDate A string -> format YYYY-MM-DD
@@ -19,8 +23,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' datorama_query(token = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-#'                brandId = "271",
+#' datorama_query(acces_token = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+#'                workspaceId = "271",
 #'                dateRange = "CUSTOM",
 #'                startDate = "2017-11-01",
 #'                endDate = "2017-11-20",
@@ -31,65 +35,27 @@
 #' }
 #' @return A tibble with the query's response
 #' @export
-datorama_query <- function(token = NULL,
-                              brandId = NULL,
-                              dateRange = c("CUSTOM",
-                                            "CUSTOM_ON_GOING",
-                                            "YESTERDAY",
-                                            "WEEK_TO_DATE",
-                                            "BI_WEEK_TO_DATE",
-                                            "MONTH_TO_DATE",
-                                            "QUARTER_TO_DATE",
-                                            "YEAR_TO_DATE",
-                                            "WEEK_TO_DATE_CUSTOM",
-                                            "BI_WEEK_TO_DATE_CUSTOM",
-                                            "MONTH_TO_DATE_CUSTOM",
-                                            "QUARTER_TO_DATE_CUSTOM",
-                                            "YEAR_TO_DATE_CUSTOM",
-                                            "PREV_WEEK",
-                                            "PREV_BI_WEEK",
-                                            "PREV_MONTH",
-                                            "PREV_QUARTER",
-                                            "PREV_YEAR",
-                                            "PREV_WEEK_CUSTOM",
-                                            "PREV_BI_WEEK_CUSTOM",
-                                            "PREV_MONTH_CUSTOM",
-                                            "PREV_QUARTER_CUSTOM",
-                                            "PREV_YEAR_CUSTOM",
-                                            "LAST_WEEK",
-                                            "LAST_BI_WEEK",
-                                            "LAST_MONTH",
-                                            "LAST_3_MONTHS",
-                                            "THIS_WEEK",
-                                            "THIS_BI_WEEK",
-                                            "THIS_MONTH",
-                                            "THIS_QUARTER",
-                                            "THIS_YEAR",
-                                            "THIS_WEEK_CUSTOM",
-                                            "THIS_BI_WEEK_CUSTOM",
-                                            "THIS_MONTH_CUSTOM",
-                                            "THIS_QUARTER_CUSTOM",
-                                            "THIS_YEAR_CUSTOM"),
-                              startDate = NULL,
-                              endDate = NULL,
-                              measurements = NULL,
-                              dimensions = NULL,
-                              groupDimensionFilters = NULL,
-                              stringDimensionFilters = NULL,
-                              stringDimensionFiltersOperator = NULL,
-                              numberMeasurementFilter = NULL,
-                              sortBy = NULL,
-                              sortOrder = NULL,
-                              topResults = NULL,
-                              groupOthers = NULL,
-                              topPerDimension = NULL) {
+datorama_query <- function(access_token = NULL,
+                           workspaceId = NULL,
+                           dateRange = NULL,
+                           startDate = NULL,
+                           endDate = NULL,
+                           measurements = NULL,
+                           dimensions = NULL,
+                           groupDimensionFilters = NULL,
+                           stringDimensionFilters = NULL,
+                           stringDimensionFiltersOperator = NULL,
+                           numberMeasurementFilter = NULL,
+                           sortBy = NULL,
+                           sortOrder = NULL,
+                           topResults = NULL,
+                           groupOthers = NULL,
+                           topPerDimension = NULL) {
 
   tryCatch(
-    response <- httr::POST(paste("https://app.datorama.com/services/query/execQuery?token=",
-                     token,
-                     sep = ""),
+    response <- httr::POST("https://api.datorama.com/v1/query", httr::add_headers(Authorization = access_token),
                body = list(
-                 brandId = brandId,
+                 workspaceId = workspaceId,
                  dateRange = dateRange,
                  startDate = startDate,
                  endDate = endDate,
@@ -107,7 +73,7 @@ datorama_query <- function(token = NULL,
                ),
                encode = "json"
     ),
-    query_warning = function(w) print("Query failed...so sad. Try again!\nAt a minimum you need a brandId, dateRange, measurement and dimension in order to get a successful result.\nAdditionally, make sure you have a token generated from dataorama_auth()")
+    query_warning = function(w) print("Query Failure:\nAt a minimum you need a workspaceId, dateRange, measurement and dimension in order to get a successful result.\nAlso, a proper access_token.")
   )
 
   response_to_text <- jsonlite::fromJSON(httr::content(response, "text"))
@@ -116,7 +82,7 @@ datorama_query <- function(token = NULL,
   names(text_to_tibble) <- tibble_headers
 
   if (nrow(text_to_tibble) == 0) {
-    warning("Hmmm...no rows returned. There might be a problem.")
+    warning("Error: no rows were returned.")
   }
 
   return(text_to_tibble)
