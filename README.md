@@ -2,7 +2,7 @@
 
 An interface to the [Datorama](https://datorama.com) Query & Platform API.  
 
-[![Build Status](https://travis-ci.org/beigebrucewayne/datoramar.svg?branch=master)](https://travis-ci.org/beigebrucewayne/datoramar) [![CRAN status](http://www.r-pkg.org/badges/version/datoramar)](http://www.r-pkg.org/badges/version/datoramar)
+[![Build Status](https://travis-ci.org/kadekillary/datoramar.svg?branch=master)](https://travis-ci.org/kadekillary/datoramar) [![CRAN status](http://www.r-pkg.org/badges/version/datoramar)](http://www.r-pkg.org/badges/version/datoramar)
 
 ![logo](https://i.imgur.com/6c5kH7S.png)
 
