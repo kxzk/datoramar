@@ -27,6 +27,8 @@ All API requests must authenticate using your personal API access token. The tok
 
 Conversely, create an `.Renviron` file and specify your `ACCESS_TOKEN` in there. Now you can call it via R using `Sys.getenv("ACCESS_TOKEN")`.
 
+![api_token](https://i.imgur.com/pb9CMaD.png)
+
 &nbsp;
 ## Usage
 
